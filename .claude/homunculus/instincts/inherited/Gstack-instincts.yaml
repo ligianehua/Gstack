@@ -1,0 +1,859 @@
+# Instincts generated from https://github.com/ligianehua/Gstack
+# Generated: 2026-03-30T06:38:11.761Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: Gstack-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, fix, docs
+
+## Evidence
+
+- 167 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat: rotating founder resources in /office-hours closing (v0.13.10.0) (#652), fix: security audit round 2 (v0.13.4.0) (#640)
+
+---
+id: Gstack-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Commit Length
+
+## Action
+
+Write moderate-length commit messages (~71 characters)
+
+## Evidence
+
+- Average commit message length: 71 chars
+- Based on 167 commits
+
+---
+id: Gstack-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: Gstack-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: Gstack-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: Gstack-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: Gstack-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Test Framework
+
+## Action
+
+Use jest as the test framework
+
+## Evidence
+
+- Test framework detected: jest
+- File pattern: *.test.ts
+
+---
+id: Gstack-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.ts
+
+## Evidence
+
+- File pattern: *.test.ts
+- Consistent across test files
+
+---
+id: Gstack-test-types
+trigger: "when planning tests for a feature"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Test Types
+
+## Action
+
+Write unit, integration, e2e tests to match project standards
+
+## Evidence
+
+- Test types detected: unit, integration, e2e
+- Coverage config: yes
+
+---
+id: Gstack-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~25x per month
+- Files: scripts/*, test/*, test/helpers/*
+
+---
+id: Gstack-workflow-test-driven-development
+trigger: "when adding new functionality"
+confidence: 0.75
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Test Driven Development
+
+## Action
+
+Follow the test-driven-development workflow:
+1. Write failing test
+2. Implement code to pass test
+3. Refactor if needed
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~5x per month
+- Files: **/*.test.*, **/*.spec.*, src/**/*
+
+---
+id: Gstack-workflow-refactoring
+trigger: "when refactoring code"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Refactoring
+
+## Action
+
+Follow the refactoring workflow:
+1. Ensure tests pass before refactor
+2. Refactor code structure
+3. Verify tests still pass
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~8x per month
+- Files: src/**/*
+
+---
+id: Gstack-workflow-skill-template-edit-and-regenerate
+trigger: "when doing skill template edit and regenerate"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Skill Template Edit And Regenerate
+
+## Action
+
+Follow the skill-template-edit-and-regenerate workflow:
+1. Edit one or more SKILL.md.tmpl files or scripts/resolvers/*.ts
+2. Run scripts/gen-skill-docs.ts (often via bun run gen:skill-docs or build script)
+3. Regenerate SKILL.md files for each skill directory (e.g., office-hours/SKILL.md, plan-eng-review/SKILL.md, etc.)
+4. Regenerate Codex/Factory files if needed (.agents/skills/*/SKILL.md, .factory/skills/*/SKILL.md)
+5. Commit regenerated SKILL.md and related files
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: */SKILL.md.tmpl, scripts/resolvers/*.ts, scripts/gen-skill-docs.ts
+
+---
+id: Gstack-workflow-version-bump-and-changelog-update
+trigger: "when doing version bump and changelog update"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Version Bump And Changelog Update
+
+## Action
+
+Follow the version-bump-and-changelog-update workflow:
+1. Edit VERSION file to increment version (e.g., v0.13.5.0 → v0.13.6.0)
+2. Update CHANGELOG.md with a new entry at the top describing the changes
+3. Optionally sync package.json version field
+4. Commit VERSION, CHANGELOG.md, and package.json
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~8x per month
+- Files: VERSION, CHANGELOG.md, package.json
+
+---
+id: Gstack-workflow-security-audit-remediation
+trigger: "when doing security audit remediation"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Security Audit Remediation
+
+## Action
+
+Follow the security-audit-remediation workflow:
+1. Edit code to address security issues (e.g., path validation, auth, escaping, sandboxing)
+2. Update or add tests to cover the remediations
+3. Update documentation to reflect new security practices
+4. Bump version and update changelog
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: browse/src/*.ts, bin/gstack-*, test/*.test.ts
+
+---
+id: Gstack-workflow-add-or-update-skill-template-field-or-section
+trigger: "when doing add or update skill template field or section"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Add Or Update Skill Template Field Or Section
+
+## Action
+
+Follow the add-or-update-skill-template-field-or-section workflow:
+1. Edit scripts/resolvers/*.ts to add new resolver or logic
+2. Update all relevant SKILL.md.tmpl files to include new placeholder or section
+3. Run scripts/gen-skill-docs.ts to regenerate SKILL.md files
+4. Commit changes to templates, resolvers, and all regenerated SKILL.md files
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: scripts/resolvers/*.ts, */SKILL.md.tmpl, */SKILL.md
+
+---
+id: Gstack-workflow-test-suite-expansion-and-regression-guard
+trigger: "when doing test suite expansion and regression guard"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Test Suite Expansion And Regression Guard
+
+## Action
+
+Follow the test-suite-expansion-and-regression-guard workflow:
+1. Write or update test files to cover new or changed behavior
+2. Add regression tests for known issues (e.g., zsh glob, codex cwd, security edge cases)
+3. Commit test files and any related code changes
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: test/*.test.ts, test/helpers/*.ts, test/gen-skill-docs.test.ts
+
+---
+id: Gstack-workflow-cross-host-skill-generation-and-factory-support
+trigger: "when doing cross host skill generation and factory support"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Cross Host Skill Generation And Factory Support
+
+## Action
+
+Follow the cross-host-skill-generation-and-factory-support workflow:
+1. Edit scripts/gen-skill-docs.ts and scripts/resolvers/types.ts to support new host
+2. Update setup script to generate skills for new host
+3. Regenerate skill docs for all hosts (.agents/skills, .factory/skills, etc.)
+4. Update or add tests for host-specific output
+5. Commit all related changes
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: scripts/gen-skill-docs.ts, scripts/resolvers/types.ts, setup
+
+---
+id: Gstack-workflow-gitignore-and-remove-generated-or-build-files
+trigger: "when doing gitignore and remove generated or build files"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Gitignore And Remove Generated Or Build Files
+
+## Action
+
+Follow the gitignore-and-remove-generated-or-build-files workflow:
+1. Edit .gitignore to add new generated directory (e.g., .factory/)
+2. Remove files from git tracking (git rm --cached ...)
+3. Commit .gitignore and removal changes
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: .gitignore, <generated directory>/*
+
+---
+id: Gstack-workflow-sync-version-between-files
+trigger: "when doing sync version between files"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/ligianehua/Gstack
+---
+
+# Gstack Workflow Sync Version Between Files
+
+## Action
+
+Follow the sync-version-between-files workflow:
+1. Edit VERSION file
+2. Edit package.json version field to match
+3. Optionally update SKILL.md or other metadata if version is embedded
+4. Commit all version updates
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: VERSION, package.json, */SKILL.md
+
+---
+id: gstack-instinct-file-naming-camelcase
+trigger: "When creating or renaming a file in the codebase"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct File Naming Camelcase
+
+## Action
+
+Name the file using camelCase convention
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.files
+- Consistent file naming in src and scripts folders
+
+---
+id: gstack-instinct-function-naming-camelcase
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Function Naming Camelcase
+
+## Action
+
+Name the function using camelCase
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.functions
+- TypeScript code samples
+
+---
+id: gstack-instinct-class-naming-pascalcase
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Class Naming Pascalcase
+
+## Action
+
+Name the class using PascalCase
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.classes
+- TypeScript class definitions
+
+---
+id: gstack-instinct-constant-naming-screaming-snake
+trigger: "When declaring a constant"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Constant Naming Screaming Snake
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.constants
+- TypeScript code samples
+
+---
+id: gstack-instinct-import-style-relative
+trigger: "When importing modules within the project"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Import Style Relative
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- codeStyle.importStyle is relative
+- Consistent use in scripts and src
+
+---
+id: gstack-instinct-export-style-named
+trigger: "When exporting functions, classes, or constants"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Export Style Named
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- codeStyle.exportStyle is named
+- TypeScript code samples
+
+---
+id: gstack-instinct-test-file-pattern
+trigger: "When creating a test file"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Test File Pattern
+
+## Action
+
+Name the file with a .test.ts suffix
+
+## Evidence
+
+- testing.filePattern is *.test.ts
+- test/helpers/*.ts and test/*.test.ts files
+
+---
+id: gstack-instinct-test-framework-jest
+trigger: "When writing or running tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Test Framework Jest
+
+## Action
+
+Use the Jest testing framework
+
+## Evidence
+
+- testing.framework is jest
+- Presence of jest config and test files
+
+---
+id: gstack-instinct-test-types-mixed
+trigger: "When expanding test coverage"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Test Types Mixed
+
+## Action
+
+Include unit, integration, and E2E tests as appropriate
+
+## Evidence
+
+- testing.testTypes includes unit, integration, e2e
+- test: E2E tests for plan review report and Codex offering (v0.11.15.0) (#449)
+
+---
+id: gstack-instinct-test-coverage-config
+trigger: "When configuring or running tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Test Coverage Config
+
+## Action
+
+Ensure test coverage is measured and reported
+
+## Evidence
+
+- testing.coverageConfig is true
+- Presence of coverage reports in CI configs
+
+---
+id: gstack-instinct-commit-conventional-format
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Commit Conventional Format
+
+## Action
+
+Use conventional commit prefixes (feat, fix, docs, chore, test)
+
+## Evidence
+
+- Pattern in commits: 'feat: rotating founder resources...', 'fix: security audit round 2...'
+- commit examples use conventional format
+
+---
+id: gstack-instinct-commit-length-70-chars
+trigger: "When composing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Commit Length 70 Chars
+
+## Action
+
+Keep the commit message around 70 characters on average
+
+## Evidence
+
+- commits.averageLength is 71
+- Observed in commit history
+
+---
+id: gstack-instinct-skill-template-edit-and-regenerate
+trigger: "When a SKILL.md.tmpl template or resolver is changed, or when adding a new skill"
+confidence: 0.98
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Skill Template Edit And Regenerate
+
+## Action
+
+Regenerate all SKILL.md files for all hosts using scripts/gen-skill-docs.ts and commit the changes
+
+## Evidence
+
+- Workflow: skill-template-edit-and-regenerate
+- Commits and file patterns in scripts/gen-skill-docs.ts, */SKILL.md.tmpl, */SKILL.md
+
+---
+id: gstack-instinct-version-bump-and-changelog-update
+trigger: "When a feature, fix, or release is completed and needs to be recorded"
+confidence: 0.97
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Version Bump And Changelog Update
+
+## Action
+
+Increment VERSION, update CHANGELOG.md, and sync package.json version if needed, then commit
+
+## Evidence
+
+- Workflow: version-bump-and-changelog-update
+- Commits editing VERSION, CHANGELOG.md, package.json
+
+---
+id: gstack-instinct-security-audit-remediation
+trigger: "When a security audit or review identifies vulnerabilities"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Security Audit Remediation
+
+## Action
+
+Apply security fixes, add/fix tests, update docs, bump version, and update changelog
+
+## Evidence
+
+- Workflow: security-audit-remediation
+- Commits: fix: security audit round 2 (v0.13.4.0) (#640)
+
+---
+id: gstack-instinct-add-or-update-skill-template-field-or-section
+trigger: "When introducing a new field, section, or resolver to all skill templates"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Add Or Update Skill Template Field Or Section
+
+## Action
+
+Edit scripts/resolvers/*.ts and SKILL.md.tmpl, regenerate SKILL.md files, and commit all changes
+
+## Evidence
+
+- Workflow: add-or-update-skill-template-field-or-section
+- Commits and file patterns in scripts/resolvers/*.ts, */SKILL.md.tmpl, */SKILL.md
+
+---
+id: gstack-instinct-test-suite-expansion-and-regression-guard
+trigger: "When new features are added or bugs are fixed"
+confidence: 0.93
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Test Suite Expansion And Regression Guard
+
+## Action
+
+Add or update test files to cover new or changed behavior and commit
+
+## Evidence
+
+- Workflow: test-suite-expansion-and-regression-guard
+- Commits: test: E2E tests for plan review report and Codex offering (v0.11.15.0) (#449)
+
+---
+id: gstack-instinct-cross-host-skill-generation-and-factory-support
+trigger: "When adding a new host or updating host-specific logic for skills"
+confidence: 0.92
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Cross Host Skill Generation And Factory Support
+
+## Action
+
+Update scripts/gen-skill-docs.ts and related files for new host, regenerate docs, update tests, and commit
+
+## Evidence
+
+- Workflow: cross-host-skill-generation-and-factory-support
+- Commits and file patterns in scripts/gen-skill-docs.ts, scripts/resolvers/types.ts, .factory/skills/*/SKILL.md
+
+---
+id: gstack-instinct-gitignore-and-remove-generated-or-build-files
+trigger: "When a build artifact or generated output should not be tracked in git"
+confidence: 0.88
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Gitignore And Remove Generated Or Build Files
+
+## Action
+
+Add the directory to .gitignore, remove from git tracking, and commit changes
+
+## Evidence
+
+- Workflow: gitignore-and-remove-generated-or-build-files
+- Commit: chore: gitignore .factory and remove tracked files (v0.13.5.1) (#642)
+
+---
+id: gstack-instinct-sync-version-between-files
+trigger: "When a version bump occurs and version fields must be kept in sync"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: ligianehua/Gstack
+---
+
+# Gstack Instinct Sync Version Between Files
+
+## Action
+
+Edit VERSION, package.json, and optionally SKILL.md to match, then commit
+
+## Evidence
+
+- Workflow: sync-version-between-files
+- Commits editing VERSION, package.json, */SKILL.md
+
