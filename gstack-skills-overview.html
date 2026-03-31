@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gstack Skills Overview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      border-bottom: 1px solid #222;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #999;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    .hero .author {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .hero .author a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat .label {
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .category {
+      margin-bottom: 48px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+
+    .category-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .category-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .category-header .count {
+      font-size: 0.8rem;
+      color: #888;
+      background: #1a1a1a;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card:hover {
+      border-color: #444;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .skill-card.cat-founder::before { background: linear-gradient(90deg, #f59e0b, #f97316); }
+    .skill-card.cat-design::before { background: linear-gradient(90deg, #ec4899, #f472b6); }
+    .skill-card.cat-engineering::before { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+    .skill-card.cat-qa::before { background: linear-gradient(90deg, #10b981, #34d399); }
+    .skill-card.cat-devops::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .skill-card.cat-safety::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+    .skill-card.cat-setup::before { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+    .skill-card.cat-security::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+    .skill-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-bottom: 4px;
+    }
+
+    .skill-role {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .cat-founder .skill-role { color: #f59e0b; }
+    .cat-design .skill-role { color: #ec4899; }
+    .cat-engineering .skill-role { color: #6366f1; }
+    .cat-qa .skill-role { color: #10b981; }
+    .cat-devops .skill-role { color: #8b5cf6; }
+    .cat-safety .skill-role { color: #ef4444; }
+    .cat-setup .skill-role { color: #9ca3af; }
+    .cat-security .skill-role { color: #f59e0b; }
+
+    .skill-desc {
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    .tag-browser {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tag-ai {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .tag-hook {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #222;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .quickstart {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+
+    .quickstart h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .quickstart ol {
+      padding-left: 20px;
+      color: #bbb;
+    }
+
+    .quickstart li {
+      margin-bottom: 8px;
+    }
+
+    .quickstart code {
+      background: #1a1a2e;
+      color: #a5b4fc;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Gstack Skills</h1>
+    <p>Garry Tan 打造的 Claude Code 虚拟工程团队 — 用 slash 命令召唤 CEO、设计师、工程经理、QA、安全官和发布工程师。</p>
+    <p class="author">by <a href="https://x.com/garrytan" target="_blank">Garry Tan</a> (Y Combinator CEO) &middot; MIT License &middot; <a href="https://github.com/garrytan/gstack" target="_blank">GitHub</a></p>
+    <div class="stats">
+      <div class="stat"><div class="number">31</div><div class="label">Skills</div></div>
+      <div class="stat"><div class="number">8</div><div class="label">Categories</div></div>
+      <div class="stat"><div class="number">56K+</div><div class="label">GitHub Stars</div></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="quickstart">
+      <h2>Quick Start</h2>
+      <ol>
+        <li>安装: <code>git clone --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup</code></li>
+        <li>在 Claude Code 中输入 <code>/office-hours</code> 开始体验</li>
+        <li>试试 <code>/plan-ceo-review</code> 审视你的产品方向</li>
+        <li>用 <code>/review</code> 审查你的代码, 用 <code>/ship</code> 发布</li>
+      </ol>
+    </div>
+
+    <!-- Founder / Product -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(245,158,11,0.15);">&#x1F3AF;</div>
+        <h2>Founder / Product</h2>
+        <span class="count">3 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-founder">
+          <div class="skill-name">/office-hours</div>
+          <div class="skill-role">YC Office Hours</div>
+          <div class="skill-desc">YC 式头脑风暴。两种模式：创业模式（需求验证、竞品分析、现状挑战）和建造者模式（设计思维）。自动生成设计文档，帮你想清楚产品方向。</div>
+        </div>
+        <div class="skill-card cat-founder">
+          <div class="skill-name">/plan-ceo-review</div>
+          <div class="skill-role">CEO Review</div>
+          <div class="skill-desc">CEO 视角审查你的计划。重新思考问题本质，寻找 10 星级产品，挑战你的假设，智能扩展方案范围。像创始人一样思考。</div>
+        </div>
+        <div class="skill-card cat-founder">
+          <div class="skill-name">/autoplan</div>
+          <div class="skill-role">Auto Review Pipeline</div>
+          <div class="skill-desc">自动化审查流水线：依次运行 CEO 审查、设计审查、工程审查，使用 6 条决策原则自动做出判断。一键完成全方位审查。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(236,72,153,0.15);">&#x1F3A8;</div>
+        <h2>Design</h2>
+        <span class="count">4 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-design">
+          <div class="skill-name">/design-consultation</div>
+          <div class="skill-role">Design System</div>
+          <div class="skill-desc">从零创建设计系统：提出美学方向、字体选择、配色方案、布局、间距、动效。生成 DESIGN.md 和字体/配色预览页面。</div>
+        </div>
+        <div class="skill-card cat-design">
+          <div class="skill-name">/design-shotgun</div>
+          <div class="skill-role">Design Exploration</div>
+          <div class="skill-desc">生成多个 AI 设计变体，打开对比面板，收集反馈并迭代。快速探索视觉设计方向。</div>
+          <span class="skill-tag tag-ai">AI Image</span>
+        </div>
+        <div class="skill-card cat-design">
+          <div class="skill-name">/design-review</div>
+          <div class="skill-role">Visual QA</div>
+          <div class="skill-desc">设计师视角审查线上页面。找出视觉不一致、间距问题、层级混乱、AI 生成痕迹和慢交互，然后直接修复它们。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-design">
+          <div class="skill-name">/plan-design-review</div>
+          <div class="skill-role">Plan Design Audit</div>
+          <div class="skill-desc">设计维度审查你的计划。对每个维度打 0-10 分，解释满分标准是什么，然后修改计划使其达标。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Engineering -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(99,102,241,0.15);">&#x1F527;</div>
+        <h2>Engineering</h2>
+        <span class="count">6 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/plan-eng-review</div>
+          <div class="skill-role">Eng Manager</div>
+          <div class="skill-desc">工程经理视角审查。锁定执行计划：架构设计、数据流、图表、边界情况、测试覆盖率、性能分析。</div>
+        </div>
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/review</div>
+          <div class="skill-role">Code Review</div>
+          <div class="skill-desc">Landing 前代码审查。分析 diff 中的 SQL 安全问题、LLM 信任边界违规、条件副作用等结构性问题。</div>
+        </div>
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/ship</div>
+          <div class="skill-role">Release Engineer</div>
+          <div class="skill-desc">完整发布流程：检测并合并基分支、运行测试、审查 diff、版本号升级、更新 CHANGELOG、提交、推送、创建 PR。</div>
+        </div>
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/investigate</div>
+          <div class="skill-role">Debugger</div>
+          <div class="skill-desc">系统化根因调查，四个阶段：调查、分析、假设、实现。铁律：没有根因不修 bug。</div>
+        </div>
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/retro</div>
+          <div class="skill-role">Retrospective</div>
+          <div class="skill-desc">每周工程回顾。分析提交历史、工作模式、代码质量指标，支持持久化历史和趋势追踪。支持团队模式。</div>
+        </div>
+        <div class="skill-card cat-engineering">
+          <div class="skill-name">/codex</div>
+          <div class="skill-role">Second Opinion</div>
+          <div class="skill-desc">OpenAI Codex CLI 封装，三种模式：代码审查（通过/失败门禁）、挑战（对抗式）、咨询（会话延续）。多 AI 第二意见。</div>
+          <span class="skill-tag tag-ai">Multi-AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QA / Testing -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(16,185,129,0.15);">&#x1F50D;</div>
+        <h2>QA / Testing</h2>
+        <span class="count">4 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-qa">
+          <div class="skill-name">/qa</div>
+          <div class="skill-role">QA + Fix</div>
+          <div class="skill-desc">系统化 QA 测试 Web 应用并修复发现的 Bug。运行测试后，迭代修复每个 bug，原子提交并重新验证。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-qa">
+          <div class="skill-name">/qa-only</div>
+          <div class="skill-role">QA Report Only</div>
+          <div class="skill-desc">仅报告的 QA 测试。测试 Web 应用并生成结构化报告：健康评分、截图、复现步骤 — 但不做任何修复。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-qa">
+          <div class="skill-name">/browse</div>
+          <div class="skill-role">Headless Browser</div>
+          <div class="skill-desc">快速无头浏览器。导航页面、交互元素、验证状态、前后对比、标注截图、测试响应式布局、表单、上传、对话框。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-qa">
+          <div class="skill-name">/benchmark</div>
+          <div class="skill-role">Performance</div>
+          <div class="skill-desc">性能回归检测。建立页面加载时间、Core Web Vitals、资源大小的基线，追踪趋势变化。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DevOps / Deployment -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(139,92,246,0.15);">&#x1F680;</div>
+        <h2>DevOps / Deployment</h2>
+        <span class="count">3 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-devops">
+          <div class="skill-name">/land-and-deploy</div>
+          <div class="skill-role">Deploy Pipeline</div>
+          <div class="skill-desc">完整部署流程：合并 PR、等待 CI 和部署完成、通过金丝雀检查验证生产环境健康状况。</div>
+        </div>
+        <div class="skill-card cat-devops">
+          <div class="skill-name">/canary</div>
+          <div class="skill-role">Post-Deploy Monitor</div>
+          <div class="skill-desc">部署后金丝雀监控。使用 browse 守护进程持续监控线上应用的控制台错误、性能回归和页面故障。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-devops">
+          <div class="skill-name">/document-release</div>
+          <div class="skill-role">Doc Engineer</div>
+          <div class="skill-desc">发布后文档更新。读取所有项目文档，交叉对比 diff，更新 README、ARCHITECTURE、CONTRIBUTING、CLAUDE.md。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(245,158,11,0.15);">&#x1F6E1;</div>
+        <h2>Security</h2>
+        <span class="count">1 skill</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-security">
+          <div class="skill-name">/cso</div>
+          <div class="skill-role">Chief Security Officer</div>
+          <div class="skill-desc">首席安全官模式。基础设施优先的安全审计：密钥考古、依赖供应链、CI/CD 安全、LLM/AI 安全、OWASP Top 10、STRIDE 威胁建模。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safety -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(239,68,68,0.15);">&#x1F6A7;</div>
+        <h2>Safety</h2>
+        <span class="count">4 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-safety">
+          <div class="skill-name">/careful</div>
+          <div class="skill-role">Safety Guardrails</div>
+          <div class="skill-desc">危险命令防护。在执行 rm -rf、DROP TABLE、force-push、git reset --hard、kubectl delete 前发出警告，用户可以选择覆盖。</div>
+          <span class="skill-tag tag-hook">Hook</span>
+        </div>
+        <div class="skill-card cat-safety">
+          <div class="skill-name">/freeze</div>
+          <div class="skill-role">Directory Lock</div>
+          <div class="skill-desc">会话级目录锁定。限制文件编辑只能在指定目录内进行，阻止对其他路径的 Edit 和 Write 操作。</div>
+          <span class="skill-tag tag-hook">Hook</span>
+        </div>
+        <div class="skill-card cat-safety">
+          <div class="skill-name">/unfreeze</div>
+          <div class="skill-role">Unlock</div>
+          <div class="skill-desc">解除 /freeze 设置的目录限制，恢复对所有目录的编辑权限。</div>
+        </div>
+        <div class="skill-card cat-safety">
+          <div class="skill-name">/guard</div>
+          <div class="skill-role">Full Safety Mode</div>
+          <div class="skill-desc">完整安全模式：同时启用 /careful（危险命令警告）和 /freeze（目录级别编辑限制）。</div>
+          <span class="skill-tag tag-hook">Hook</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Setup / Utilities -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: rgba(107,114,128,0.15);">&#x2699;</div>
+        <h2>Setup / Utilities</h2>
+        <span class="count">5 skills</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card cat-setup">
+          <div class="skill-name">/setup-deploy</div>
+          <div class="skill-role">Deploy Config</div>
+          <div class="skill-desc">配置部署设置。自动检测部署平台（Fly.io、Render、Vercel、Netlify、Heroku、GitHub Actions）、生产 URL、健康检查端点。</div>
+        </div>
+        <div class="skill-card cat-setup">
+          <div class="skill-name">/setup-browser-cookies</div>
+          <div class="skill-role">Cookie Import</div>
+          <div class="skill-desc">从你的真实 Chromium 浏览器导入 Cookie 到无头浏览器会话中。打开交互式选择器进行 Cookie 域名选择。</div>
+        </div>
+        <div class="skill-card cat-setup">
+          <div class="skill-name">/connect-chrome</div>
+          <div class="skill-role">Headed Chrome</div>
+          <div class="skill-desc">启动由 gstack 控制的真实 Chrome 窗口，自动加载侧边栏扩展。将 Claude 连接到可见的 Chrome 窗口进行实时观察。</div>
+          <span class="skill-tag tag-browser">Browser</span>
+        </div>
+        <div class="skill-card cat-setup">
+          <div class="skill-name">/learn</div>
+          <div class="skill-role">Knowledge Manager</div>
+          <div class="skill-desc">管理项目学习记录。审查、搜索、修剪和导出 gstack 在各个会话中积累的项目知识。</div>
+        </div>
+        <div class="skill-card cat-setup">
+          <div class="skill-name">/gstack-upgrade</div>
+          <div class="skill-role">Upgrade</div>
+          <div class="skill-desc">升级 gstack 到最新版本。自动检测全局安装还是项目内安装，执行升级并展示更新内容。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Gstack by <a href="https://github.com/garrytan/gstack" target="_blank">Garry Tan</a> &middot; MIT License &middot; 31 Skills for Claude Code</p>
+    <p style="margin-top: 8px;">Generated for skill overview purposes</p>
+  </div>
+
+</body>
+</html>
